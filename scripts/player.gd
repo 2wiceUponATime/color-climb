@@ -8,12 +8,18 @@ const JUMP_VELOCITY = -350.0
 @onready var background_music: AudioStreamPlayer2D = $BackgroundMusic
 var fading_out = false
 
+func _ready() -> void:
+	var data = Save.data
+	if data.size():
+		spawnpoint = Vector2(data["spawnpoint_x"], data["spawnpoint_y"])
+		position = spawnpoint
+	
 func apply_gravity(delta: float) -> void:
 	if position.y > -1000:
 		velocity += get_gravity() * delta
 	else:
 		velocity.y = -100
-		await fade_out()
+		fade_out()
 
 func fade_out() -> void:
 	if fading_out:
@@ -31,7 +37,7 @@ func fade_out() -> void:
 	)
 	tween.parallel().tween_property(background_music, "volume_db", -50, 3)
 	await tween.finished
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _physics_process(delta: float) -> void:
 	var debug = OS.is_debug_build() and Input.is_action_pressed("debug")
@@ -95,6 +101,10 @@ func debug_physics_process():
 		velocity.y = move_toward(velocity.y, 0, speed)
 	
 	move_and_slide()
+
+func save():
+	Save.data["spawnpoint_x"] = spawnpoint.x
+	Save.data["spawnpoint_y"] = spawnpoint.y
 
 func kill():
 	if not $KillTimer.is_stopped():

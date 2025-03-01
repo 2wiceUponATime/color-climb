@@ -27,6 +27,7 @@ func _on_crumble_area_body_entered(_body: Node2D) -> void:
 		particles.emitting = true
 		particles.position.y = 8
 		sprite.play("destroy")
+		$CrumbleSound.play()
 
 func _on_animated_sprite_2d_frame_changed() -> void:
 	if sprite.frame == 0 and respawn_timer.is_stopped():

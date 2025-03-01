@@ -27,3 +27,5 @@ func _process(_delta: float) -> void:
 		set_cell(tile_pos, 0, Tiles.CHECKPOINT_COMPLETE)
 		var spawnpoint = to_global(map_to_local(tile_pos))
 		player.spawnpoint = player.get_parent().to_local(spawnpoint)
+		player.save()
+		Save.save()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://ccguqdfs7kxeh"]
+[gd_scene load_steps=19 format=3 uid="uid://ccguqdfs7kxeh"]
 
 [ext_resource type="Script" path="res://scripts/crumbling_tile.gd" id="1_1351t"]
 [ext_resource type="Texture2D" uid="uid://dygaqthrtjgtd" path="res://assets/crumbling_tile.png" id="1_v76ap"]
+[ext_resource type="AudioStream" uid="uid://soewmm3owc6d" path="res://assets/crumble.wav" id="3_541um"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_52iay"]
 atlas = ExtResource("1_v76ap")
@@ -129,6 +130,10 @@ process_material = SubResource("ParticleProcessMaterial_nidj3")
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="CrumbleSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_541um")
+volume_db = -10.0
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="body_entered" from="CrumbleArea" to="." method="_on_crumble_area_body_entered"]
