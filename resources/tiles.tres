@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://b7qqmrt61pxg2"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://b7qqmrt61pxg2"]
 
 [ext_resource type="Texture2D" uid="uid://cf8g57r30th3i" path="res://assets/tiles.png" id="1_eltsn"]
 [ext_resource type="PackedScene" uid="uid://b8rs3208xvyx" path="res://scenes/tiles/spike.tscn" id="2_8nwwx"]
 [ext_resource type="PackedScene" uid="uid://ccguqdfs7kxeh" path="res://scenes/tiles/crumbling.tscn" id="3_a65oa"]
 [ext_resource type="PackedScene" uid="uid://dl0g6jrqvhahj" path="res://scenes/tiles/rotating_half.tscn" id="5_1xksm"]
 [ext_resource type="PackedScene" uid="uid://xgel4ljubnj6" path="res://scenes/tiles/rotating.tscn" id="5_xrylt"]
+[ext_resource type="PackedScene" uid="uid://dhljh5k6nn6ls" path="res://scenes/tiles/rotating_spikes.tscn" id="6_dk3bc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_peonv"]
 texture = ExtResource("1_eltsn")
@@ -42,6 +43,7 @@ scenes/1/scene = ExtResource("2_8nwwx")
 scenes/2/scene = ExtResource("3_a65oa")
 scenes/3/scene = ExtResource("5_xrylt")
 scenes/4/scene = ExtResource("5_1xksm")
+scenes/5/scene = ExtResource("6_dk3bc")
 
 [resource]
 physics_layer_0/collision_layer = 1

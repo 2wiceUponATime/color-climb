@@ -10,7 +10,7 @@ size = Vector2(48, 16)
 atlas = ExtResource("1_0utvf")
 region = Rect2(32, 0, 16, 16)
 
-[node name="RotatingHalf" instance=ExtResource("1_ng1tc")]
+[node name="Rotating" instance=ExtResource("1_ng1tc")]
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, 0)

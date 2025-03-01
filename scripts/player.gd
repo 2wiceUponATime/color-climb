@@ -5,6 +5,33 @@ const JUMP_VELOCITY = -350.0
 @onready var spawnpoint: Vector2 = position
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var background_music: AudioStreamPlayer2D = $BackgroundMusic
+var fading_out = false
+
+func apply_gravity(delta: float) -> void:
+	if position.y > -1000:
+		velocity += get_gravity() * delta
+	else:
+		velocity.y = -100
+		await fade_out()
+
+func fade_out() -> void:
+	if fading_out:
+		return
+	fading_out = true
+	var tween = get_tree().create_tween()
+	var clear_color = RenderingServer.get_default_clear_color()
+	sprite.speed_scale = 0
+	tween.tween_property($"../FadeOut", "color", Color.BLACK, 3)
+	tween.parallel().tween_method(
+		RenderingServer.set_default_clear_color,
+		clear_color,
+		Color.BLACK,
+		3
+	)
+	tween.parallel().tween_property(background_music, "volume_db", -50, 3)
+	await tween.finished
+	get_tree().quit()
 
 func _physics_process(delta: float) -> void:
 	var debug = OS.is_debug_build() and Input.is_action_pressed("debug")
@@ -15,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	
 	if not $KillTimer.is_stopped():
 		sprite.play("death")
-		velocity += get_gravity() * delta
+		apply_gravity(delta)
 		move_and_slide()
 		return
 	
@@ -23,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	if on_floor:
 		$JumpTimer.start()
 	else:
-		velocity += get_gravity() * delta
+		apply_gravity(delta)
 
 	if Input.is_action_pressed("jump") and not $JumpTimer.is_stopped():
 		velocity.y = JUMP_VELOCITY
