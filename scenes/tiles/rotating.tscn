@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://xgel4ljubnj6"]
+
+[ext_resource type="Texture2D" uid="uid://cf8g57r30th3i" path="res://assets/tiles.png" id="1_0utvf"]
+[ext_resource type="PackedScene" uid="uid://dl0g6jrqvhahj" path="res://scenes/tiles/rotating_half.tscn" id="1_ng1tc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ld7rg"]
+size = Vector2(48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw51p"]
+atlas = ExtResource("1_0utvf")
+region = Rect2(32, 0, 16, 16)
+
+[node name="RotatingHalf" instance=ExtResource("1_ng1tc")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_ld7rg")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." index="4"]
+use_parent_material = true
+position = Vector2(16, 0)
+texture = SubResource("AtlasTexture_lw51p")

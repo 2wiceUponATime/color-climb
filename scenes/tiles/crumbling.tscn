@@ -1,0 +1,134 @@
+[gd_scene load_steps=18 format=3 uid="uid://ccguqdfs7kxeh"]
+
+[ext_resource type="Script" path="res://scripts/crumbling_tile.gd" id="1_1351t"]
+[ext_resource type="Texture2D" uid="uid://dygaqthrtjgtd" path="res://assets/crumbling_tile.png" id="1_v76ap"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52iay"]
+atlas = ExtResource("1_v76ap")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1exkh"]
+atlas = ExtResource("1_v76ap")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcne6"]
+atlas = ExtResource("1_v76ap")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhi6f"]
+atlas = ExtResource("1_v76ap")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdmo6"]
+atlas = ExtResource("1_v76ap")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5xkd"]
+atlas = ExtResource("1_v76ap")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2314g"]
+atlas = ExtResource("1_v76ap")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xup7l"]
+atlas = ExtResource("1_v76ap")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egx46"]
+atlas = ExtResource("1_v76ap")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eduey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52iay")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1exkh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcne6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhi6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdmo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5xkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2314g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xup7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egx46")
+}],
+"loop": true,
+"name": &"destroy",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvept"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxy3v"]
+size = Vector2(14, 3)
+
+[sub_resource type="Curve" id="Curve_b6ud8"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 0, Vector2(1, 0), -1.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6jhrw"]
+curve = SubResource("Curve_b6ud8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nidj3"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(8, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, 98, 0)
+scale_curve = SubResource("CurveTexture_6jhrw")
+
+[node name="Crumbling" type="StaticBody2D"]
+use_parent_material = true
+script = ExtResource("1_1351t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_eduey")
+animation = &"destroy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_uvept")
+
+[node name="CrumbleArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrumbleArea"]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_nxy3v")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+use_parent_material = true
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_nidj3")
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="body_entered" from="CrumbleArea" to="." method="_on_crumble_area_body_entered"]

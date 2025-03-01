@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dl0g6jrqvhahj"]
+
+[ext_resource type="Script" path="res://scripts/rotating_tile.gd" id="1_bjqsg"]
+[ext_resource type="Texture2D" uid="uid://cf8g57r30th3i" path="res://assets/tiles.png" id="2_qomsr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_464pk"]
+size = Vector2(32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbmbn"]
+atlas = ExtResource("2_qomsr")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw51p"]
+atlas = ExtResource("2_qomsr")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sarbi"]
+atlas = ExtResource("2_qomsr")
+region = Rect2(32, 32, 16, 16)
+
+[node name="RotatingHalf" type="StaticBody2D"]
+use_parent_material = true
+script = ExtResource("1_bjqsg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_464pk")
+
+[node name="RotationTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = SubResource("AtlasTexture_dbmbn")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+use_parent_material = true
+position = Vector2(-16, 0)
+texture = SubResource("AtlasTexture_lw51p")
+
+[node name="Center" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = SubResource("AtlasTexture_sarbi")
+
+[connection signal="timeout" from="RotationTimer" to="." method="_on_rotation_timer_timeout"]

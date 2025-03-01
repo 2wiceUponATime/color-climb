@@ -1,0 +1,54 @@
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://b7qqmrt61pxg2"]
+
+[ext_resource type="Texture2D" uid="uid://cf8g57r30th3i" path="res://assets/tiles.png" id="1_eltsn"]
+[ext_resource type="PackedScene" uid="uid://b8rs3208xvyx" path="res://scenes/tiles/spike.tscn" id="2_8nwwx"]
+[ext_resource type="PackedScene" uid="uid://ccguqdfs7kxeh" path="res://scenes/tiles/crumbling.tscn" id="3_a65oa"]
+[ext_resource type="PackedScene" uid="uid://dl0g6jrqvhahj" path="res://scenes/tiles/rotating_half.tscn" id="5_1xksm"]
+[ext_resource type="PackedScene" uid="uid://xgel4ljubnj6" path="res://scenes/tiles/rotating.tscn" id="5_xrylt"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_peonv"]
+texture = ExtResource("1_eltsn")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/next_alternative_id = 7
+0:1/0 = 0
+0:1/1 = 1
+0:1/1/custom_data_0 = Color(1, 0, 0, 1)
+0:1/1/custom_data_1 = Color(0.627451, 0, 0, 1)
+0:1/2 = 2
+0:1/2/custom_data_0 = Color(0.815686, 0.25098, 0, 1)
+0:1/2/custom_data_1 = Color(0.627451, 0.188235, 0, 1)
+0:1/3 = 3
+0:1/3/custom_data_0 = Color(0.908806, 0.843072, 3.85046e-07, 1)
+0:1/3/custom_data_1 = Color(0.572538, 0.551041, 0.0549497, 1)
+0:1/4 = 4
+0:1/4/custom_data_0 = Color(0.256406, 0.560595, 1.92523e-07, 1)
+0:1/4/custom_data_1 = Color(0.149812, 0.351969, 0, 1)
+0:1/5 = 5
+0:1/5/custom_data_0 = Color(0.168142, 0.447947, 0.70986, 1)
+0:1/5/custom_data_1 = Color(0.0775922, 0.263288, 0.43571, 1)
+0:1/6 = 6
+0:1/6/custom_data_0 = Color(0.494297, 0.00157965, 0.696829, 1)
+0:1/6/custom_data_1 = Color(0.366223, 0.000843203, 0.52254, 1)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, -20)
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_jlmws"]
+scenes/1/scene = ExtResource("2_8nwwx")
+scenes/2/scene = ExtResource("3_a65oa")
+scenes/3/scene = ExtResource("5_xrylt")
+scenes/4/scene = ExtResource("5_1xksm")
+
+[resource]
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+custom_data_layer_0/name = "from_white"
+custom_data_layer_0/type = 20
+custom_data_layer_1/name = "from_gray"
+custom_data_layer_1/type = 20
+sources/0 = SubResource("TileSetAtlasSource_peonv")
+sources/1 = SubResource("TileSetScenesCollectionSource_jlmws")
