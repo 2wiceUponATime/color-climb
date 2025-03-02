@@ -37,6 +37,7 @@ func fade_out() -> void:
 	)
 	tween.parallel().tween_property(background_music, "volume_db", -50, 3)
 	await tween.finished
+	RenderingServer.set_default_clear_color(clear_color)
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _physics_process(delta: float) -> void:
