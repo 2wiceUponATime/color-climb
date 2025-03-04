@@ -21,21 +21,40 @@ scale = Vector2(2, 2)
 text = "Color Climb"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="."]
 offset_left = 40.0
-offset_top = 90.0
+offset_top = 69.0
 offset_right = 280.0
 offset_bottom = 180.0
+alignment = 1
 
-[node name="ContinueGame" type="Button" parent="VBoxContainer"]
+[node name="ContinueGame" type="Button" parent="Buttons"]
 layout_mode = 2
 disabled = true
 text = "Continue Game"
 
-[node name="NewGame" type="Button" parent="VBoxContainer"]
+[node name="NewGame" type="Button" parent="Buttons"]
 layout_mode = 2
 theme = SubResource("Theme_mob5e")
 text = "New Game"
 
-[connection signal="pressed" from="VBoxContainer/ContinueGame" to="." method="_on_continue_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/NewGame" to="." method="_on_new_game_pressed"]
+[node name="Join" type="HBoxContainer" parent="Buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="Buttons/Join"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+placeholder_text = "Server IP"
+alignment = 1
+editable = false
+
+[node name="JoinGame" type="Button" parent="Buttons/Join"]
+layout_mode = 2
+disabled = true
+text = "Join Game"
+
+[connection signal="pressed" from="Buttons/ContinueGame" to="." method="_on_continue_game_pressed"]
+[connection signal="pressed" from="Buttons/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="Buttons/Join/JoinGame" to="." method="_on_join_game_pressed"]

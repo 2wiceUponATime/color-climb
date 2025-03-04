@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b8b1x27d54xtk"]
+[gd_scene load_steps=24 format=3 uid="uid://b8b1x27d54xtk"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_f74g0"]
 [ext_resource type="PackedScene" uid="uid://ciayh44cl1uuq" path="res://scenes/light.tscn" id="3_fqibf"]
@@ -6,6 +6,21 @@
 [ext_resource type="AudioStream" uid="uid://bjh4k6l27joo2" path="res://assets/retro_platforming.mp3" id="4_h4w8e"]
 [ext_resource type="AudioStream" uid="uid://6nt0yx2py3qv" path="res://assets/jump.wav" id="5_udigm"]
 [ext_resource type="AudioStream" uid="uid://b1tks1gvc8eiu" path="res://assets/death.wav" id="6_wc6c8"]
+[ext_resource type="AudioStream" uid="uid://cqffs5m8mtk7y" path="res://assets/checkpoint.wav" id="7_bppln"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r8u26"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:flip_h")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("AnimatedSprite2D:frame")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8esw"]
 atlas = ExtResource("3_gifan")
@@ -126,8 +141,12 @@ radius = 6.0
 height = 15.0
 
 [node name="Player" type="CharacterBody2D"]
+use_parent_material = true
 collision_layer = 2
 script = ExtResource("1_f74g0")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_r8u26")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
@@ -163,5 +182,8 @@ stream = ExtResource("5_udigm")
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_wc6c8")
+
+[node name="CheckpointSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_bppln")
 
 [connection signal="timeout" from="KillTimer" to="." method="_on_kill_timer_timeout"]

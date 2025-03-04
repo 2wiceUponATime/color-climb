@@ -2,17 +2,27 @@ class_name Player extends CharacterBody2D
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -350.0
-@onready var spawnpoint: Vector2 = position
+
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var background_music: AudioStreamPlayer2D = $BackgroundMusic
 var fading_out = false
+var spawnpoint: Vector2
+
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
 
 func _ready() -> void:
+	position = $"../Spawnpoint".position
+	spawnpoint = position
+	$MultiplayerSynchronizer.set_multiplayer_authority(name.to_int())
 	var data = Save.data
 	if data.size():
 		spawnpoint = Vector2(data["spawnpoint_x"], data["spawnpoint_y"])
 		position = spawnpoint
+	if not is_multiplayer_authority():
+		$Camera2D.queue_free()
+		$Light.queue_free()
 	
 func apply_gravity(delta: float) -> void:
 	if position.y > -1000:
@@ -28,7 +38,7 @@ func fade_out() -> void:
 	var tween = get_tree().create_tween()
 	var clear_color = RenderingServer.get_default_clear_color()
 	sprite.speed_scale = 0
-	tween.tween_property($"../FadeOut", "color", Color.BLACK, 3)
+	tween.tween_property($"../../FadeOut", "color", Color.BLACK, 3)
 	tween.parallel().tween_method(
 		RenderingServer.set_default_clear_color,
 		clear_color,
@@ -41,6 +51,8 @@ func fade_out() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _physics_process(delta: float) -> void:
+	if not is_multiplayer_authority():
+		return
 	var debug = OS.is_debug_build() and Input.is_action_pressed("debug")
 	collision_shape.disabled = debug
 	if debug:
