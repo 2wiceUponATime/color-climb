@@ -2,6 +2,11 @@ extends Node
 
 var singleplayer: bool = OS.has_feature("web")
 
+func get_rpc(callable: Callable) -> Callable:
+	if singleplayer:
+		return callable
+	return callable.rpc
+
 func _ready() -> void:
 	if OS.has_feature("pc"):
 		var window = get_window()

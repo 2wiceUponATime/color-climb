@@ -8,7 +8,12 @@ const PLAYER = preload("res://scenes/player.tscn")
 @onready var players: Node2D = $Players
 
 func _ready() -> void:
-	join_game(Global.get_id())
+	if DisplayServer.get_name() == "headless":
+		print("Running dedicated server")
+		print(multiplayer.get_unique_id())
+		$TileMapLayer.queue_free.call_deferred()
+	else:
+		Global.get_rpc(join_game).call(Global.get_id())
 
 @rpc("any_peer", "call_local", "reliable")
 func join_game(id):

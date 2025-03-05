@@ -24,6 +24,8 @@ func _ready() -> void:
 	multiplayer.multiplayer_peer = null
 	if Save.data:
 		continue_game.disabled = false
+	if DisplayServer.get_name() == "headless":
+		_on_new_game_pressed()
 	if not OS.has_feature("web"):
 		$Buttons/Join/LineEdit.editable = true
 		$Buttons/Join/JoinGame.disabled = false
