@@ -30,11 +30,13 @@ alignment = 1
 
 [node name="ContinueGame" type="Button" parent="Buttons"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 disabled = true
 text = "Continue Game"
 
 [node name="NewGame" type="Button" parent="Buttons"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = SubResource("Theme_mob5e")
 text = "New Game"
 
@@ -52,6 +54,7 @@ editable = false
 
 [node name="JoinGame" type="Button" parent="Buttons/Join"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 disabled = true
 text = "Join Game"
 

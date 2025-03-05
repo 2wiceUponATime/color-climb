@@ -20,7 +20,7 @@ func _ready() -> void:
 	if data.size():
 		spawnpoint = Vector2(data["spawnpoint_x"], data["spawnpoint_y"])
 		position = spawnpoint
-	if not is_multiplayer_authority():
+	if not Global.is_authority(self):
 		$Camera2D.queue_free()
 		$Light.queue_free()
 	
@@ -51,7 +51,7 @@ func fade_out() -> void:
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority():
+	if not Global.is_authority(self):
 		return
 	var debug = OS.is_debug_build() and Input.is_action_pressed("debug")
 	collision_shape.disabled = debug

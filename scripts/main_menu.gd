@@ -7,6 +7,8 @@ const MAX_CLIENTS = 20
 @onready var continue_game: Button = $Buttons/ContinueGame
 
 func start_server():
+	if Global.singleplayer:
+		return
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_server(PORT, MAX_CLIENTS)
 	multiplayer.multiplayer_peer = peer

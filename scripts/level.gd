@@ -8,11 +8,11 @@ const PLAYER = preload("res://scenes/player.tscn")
 @onready var players: Node2D = $Players
 
 func _ready() -> void:
-	join_game.rpc(multiplayer.get_unique_id())
+	join_game(Global.get_id())
 
 @rpc("any_peer", "call_local", "reliable")
 func join_game(id):
-	if not multiplayer.is_server():
+	if not Global.is_server():
 		return
 	print("player " + str(id) + " joined game")
 	var player = PLAYER.instantiate()

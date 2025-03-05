@@ -19,7 +19,7 @@ func create_dir(path: String):
 		dir.make_dir(path.get_file())
 
 func save() -> void:
-	if not multiplayer.is_server():
+	if not Global.is_server():
 		return
 	create_dir(SAVE_DIR)
 	var path = SAVE_DIR + save_as + ".json"
