@@ -22,4 +22,9 @@ ok_button_text = "Save"
 access = 2
 filters = PackedStringArray("*.png")
 
+[node name="BroadcastTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [connection signal="canceled" from="FileDialog" to="." method="_on_file_dialog_canceled"]
+[connection signal="timeout" from="BroadcastTimer" to="." method="_on_broadcast_timer_timeout"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://eo40ok2xe80n"]
+
+[ext_resource type="Script" path="res://scripts/join_game.gd" id="1_tndr3"]
+
+[node name="JoinGame" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_tndr3")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(0.43134, 0.43134, 0.43134, 1)
+
+[node name="GameScroll" type="ScrollContainer" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 170.0
+
+[node name="Games" type="VBoxContainer" parent="GameScroll"]
+layout_mode = 2

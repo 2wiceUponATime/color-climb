@@ -1,8 +1,9 @@
 extends Node
 
 const SAVE_DIR = "user://saves/"
-var save_as: String = "save"
-var data: Dictionary = {}
+var save_as := "save"
+var data := {}
+var disabled := false
 
 func open(save_name: String):
 	save_as = save_name
@@ -19,7 +20,7 @@ func create_dir(path: String):
 		dir.make_dir(path.get_file())
 
 func save() -> void:
-	if not Global.is_server():
+	if disabled:
 		return
 	create_dir(SAVE_DIR)
 	var path = SAVE_DIR + save_as + ".json"
