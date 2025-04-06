@@ -1,6 +1,5 @@
 extends TileMapLayer
 
-const PORT = 7777
 const MAX_CLIENTS = 20
 
 @onready var player: Player:

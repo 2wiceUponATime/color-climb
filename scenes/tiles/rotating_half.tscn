@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dl0g6jrqvhahj"]
 
-[ext_resource type="Script" path="res://scripts/rotating_tile.gd" id="1_bjqsg"]
+[ext_resource type="Script" uid="uid://cyce7pi01u6uv" path="res://scripts/rotating_tile.gd" id="1_bjqsg"]
 [ext_resource type="Texture2D" uid="uid://cf8g57r30th3i" path="res://assets/tiles.png" id="2_qomsr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_464pk"]

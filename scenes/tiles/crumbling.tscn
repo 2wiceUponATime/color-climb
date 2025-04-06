@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://ccguqdfs7kxeh"]
 
-[ext_resource type="Script" path="res://scripts/crumbling_tile.gd" id="1_1351t"]
+[ext_resource type="Script" uid="uid://bx5nvof55t85v" path="res://scripts/crumbling_tile.gd" id="1_1351t"]
 [ext_resource type="Texture2D" uid="uid://dygaqthrtjgtd" path="res://assets/crumbling_tile.png" id="1_v76ap"]
 [ext_resource type="AudioStream" uid="uid://soewmm3owc6d" path="res://assets/crumble.wav" id="3_541um"]
 

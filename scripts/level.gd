@@ -1,6 +1,5 @@
 extends Node2D
 
-const PORT = 7777
 const MAX_CLIENTS = 20
 const PLAYER = preload("res://scenes/player.tscn")
 

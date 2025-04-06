@@ -1,21 +1,40 @@
 [gd_scene load_steps=2 format=3 uid="uid://eo40ok2xe80n"]
 
-[ext_resource type="Script" path="res://scripts/join_game.gd" id="1_tndr3"]
+[ext_resource type="Script" uid="uid://dc428idmg7uwl" path="res://scripts/join_game.gd" id="1_tndr3"]
 
 [node name="JoinGame" type="Node2D"]
-scale = Vector2(2, 2)
 script = ExtResource("1_tndr3")
 
 [node name="Background" type="ColorRect" parent="."]
-offset_right = 320.0
-offset_bottom = 180.0
+offset_right = 640.0
+offset_bottom = 360.0
 color = Color(0.43134, 0.43134, 0.43134, 1)
 
 [node name="GameScroll" type="ScrollContainer" parent="."]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 310.0
-offset_bottom = 170.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 320.0
+offset_bottom = 180.0
+scale = Vector2(2, 2)
 
 [node name="Games" type="VBoxContainer" parent="GameScroll"]
 layout_mode = 2
+
+[node name="DirectAddress" type="LineEdit" parent="."]
+offset_left = 10.0
+offset_top = 306.0
+offset_right = 221.0
+offset_bottom = 328.0
+scale = Vector2(2, 2)
+placeholder_text = "Server IP"
+alignment = 1
+
+[node name="ConnectButton" type="Button" parent="."]
+offset_left = 442.0
+offset_top = 306.0
+offset_right = 536.0
+offset_bottom = 328.0
+scale = Vector2(2, 2)
+text = "Connect"
+
+[connection signal="pressed" from="ConnectButton" to="." method="join_server"]

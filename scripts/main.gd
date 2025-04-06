@@ -1,6 +1,5 @@
 extends Node2D
 
-const PORT = 7777
 const UDP_PORT = 9999
 
 @onready var file_dialog: FileDialog = $FileDialog

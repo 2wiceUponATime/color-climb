@@ -1,5 +1,8 @@
 extends Node
 
+const UDP_PORT = 26567 # "color" on a number keypad
+const PORT     = 25462 # "climb" on a number keypad
+
 var singleplayer: bool = OS.has_feature("web")
 
 func get_rpc(callable: Callable) -> Callable:

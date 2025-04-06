@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8rs3208xvyx"]
 
 [ext_resource type="Texture2D" uid="uid://cf8g57r30th3i" path="res://assets/tiles.png" id="1_ax5ox"]
-[ext_resource type="Script" path="res://scripts/spike.gd" id="1_rf5wl"]
+[ext_resource type="Script" uid="uid://cc3a87wq6l4vg" path="res://scripts/spike.gd" id="1_rf5wl"]
 
 [node name="Spike" type="Area2D"]
 use_parent_material = true

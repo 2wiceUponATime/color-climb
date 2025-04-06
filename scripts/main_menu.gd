@@ -1,7 +1,6 @@
 extends Node2D
 
 const ADDRESS = "127.0.0.1"
-const PORT = 7777
 const UDP_PORT = 9999
 const MAX_CLIENTS = 20
 
@@ -12,7 +11,7 @@ func start_server():
 	if Global.singleplayer:
 		return
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_server(PORT, MAX_CLIENTS)
+	peer.create_server(Global.PORT, MAX_CLIENTS)
 	multiplayer.multiplayer_peer = peer
 
 func _ready() -> void:

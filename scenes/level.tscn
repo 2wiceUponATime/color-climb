@@ -2,12 +2,11 @@
 
 [ext_resource type="Material" uid="uid://ccvhwyoo71d4s" path="res://resources/remap.tres" id="1_6cxcs"]
 [ext_resource type="TileSet" uid="uid://b7qqmrt61pxg2" path="res://resources/tiles.tres" id="2_lgjlm"]
-[ext_resource type="Script" path="res://scripts/level.gd" id="2_oux4m"]
-[ext_resource type="Script" path="res://scripts/level_tilemap.gd" id="4_3f35k"]
+[ext_resource type="Script" uid="uid://uop54iayr0dx" path="res://scripts/level.gd" id="2_oux4m"]
+[ext_resource type="Script" uid="uid://dfpe6ami71ciy" path="res://scripts/level_tilemap.gd" id="4_3f35k"]
 
 [node name="Level" type="Node2D"]
 material = ExtResource("1_6cxcs")
-scale = Vector2(2, 2)
 script = ExtResource("2_oux4m")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -17,7 +16,7 @@ tile_set = ExtResource("2_lgjlm")
 script = ExtResource("4_3f35k")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
+_spawnable_scenes = PackedStringArray("uid://b8b1x27d54xtk")
 spawn_path = NodePath("../Players")
 
 [node name="Players" type="Node2D" parent="."]

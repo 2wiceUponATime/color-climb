@@ -1,9 +1,10 @@
 extends Node2D
 
-const PORT = 7777
 const UDP_PORT = 9999
 
 @onready var games: VBoxContainer = $GameScroll/Games
+@onready var direct_address: LineEdit = $DirectAddress
+
 var udp := PacketPeerUDP.new()
 var servers := {}
 
@@ -12,7 +13,7 @@ func exit():
 
 func start_client(address: String):
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(address, PORT)
+	peer.create_client(address, Global.PORT)
 	multiplayer.multiplayer_peer = peer
 	await multiplayer.connected_to_server
 
@@ -22,13 +23,14 @@ func add_server(ip: String) -> void:
 	servers[ip] = null
 	var server_button = Button.new()
 	server_button.text = ip
-	server_button.pressed.connect(func ():
-		await start_client(ip)
-		Save.disabled = true
-		Save.data = {}
-		get_tree().change_scene_to_file("res://scenes/main.tscn")
-	)
+	server_button.pressed.connect(join_server.bind(ip))
 	games.add_child(server_button)
+
+func join_server(ip):
+	await start_client(ip)
+	Save.disabled = true
+	Save.data = {}
+	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
 func _ready():
 	var err := udp.bind(UDP_PORT)

@@ -2,13 +2,14 @@
 
 [ext_resource type="Material" uid="uid://ccvhwyoo71d4s" path="res://resources/remap.tres" id="1_ve1ef"]
 [ext_resource type="PackedScene" uid="uid://cxrnieyhuqo3j" path="res://scenes/level.tscn" id="2_43h8f"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="2_hmlsc"]
+[ext_resource type="Script" uid="uid://de7s5oq4qbmk2" path="res://scripts/main.gd" id="2_hmlsc"]
 
 [node name="Main" type="Node2D"]
 material = ExtResource("1_ve1ef")
 script = ExtResource("2_hmlsc")
 
 [node name="Level" parent="." instance=ExtResource("2_43h8f")]
+scale = Vector2(2, 2)
 
 [node name="Darkness" type="DirectionalLight2D" parent="."]
 blend_mode = 1
@@ -18,7 +19,6 @@ process_mode = 2
 size = Vector2i(350, 180)
 content_scale_mode = 1
 content_scale_factor = 1.5
-ok_button_text = "Save"
 access = 2
 filters = PackedStringArray("*.png")
 
