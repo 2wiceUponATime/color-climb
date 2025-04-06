@@ -4,9 +4,11 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -350.0
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var death_sensor: Area2D = $DeathSensor
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var background_music: AudioStreamPlayer2D = $BackgroundMusic
-var fading_out = false
+var fading_out := false
+var debug := false
 var spawnpoint: Vector2
 
 func _enter_tree() -> void:
@@ -53,7 +55,7 @@ func fade_out() -> void:
 func _physics_process(delta: float) -> void:
 	if not Global.is_authority(self):
 		return
-	var debug = OS.is_debug_build() and Input.is_action_pressed("debug")
+	debug = OS.is_debug_build() and Input.is_action_pressed("debug")
 	collision_shape.disabled = debug
 	if debug:
 		debug_physics_process()
@@ -93,7 +95,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and fall_speed > 600:
 		kill()
 	if position.y > 300 or Input.is_action_just_pressed("kill"):
-		kill()
+		kill(true)
 
 func debug_physics_process():
 	var speed = SPEED * 2
@@ -119,7 +121,9 @@ func save():
 	Save.data["spawnpoint_x"] = spawnpoint.x
 	Save.data["spawnpoint_y"] = spawnpoint.y
 
-func kill():
+func kill(unconditional := false):
+	if debug and not unconditional:
+		return
 	if not $KillTimer.is_stopped():
 		return
 	Engine.time_scale = 0.4
